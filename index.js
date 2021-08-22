@@ -1,3 +1,5 @@
+const db = firebase.firestore();
+
 function register() {
   event.preventDefault();
   console.log('call');
@@ -61,6 +63,7 @@ googleBtn.addEventListener('click', loginWithGoogle);
 const logoutBtn = document.getElementById('logout');
 
 const logout = () => {
+  console.log('logout');
   firebase
     .auth()
     .signOut()
@@ -71,3 +74,51 @@ const logout = () => {
 };
 
 logoutBtn.addEventListener('click', logout);
+
+const sendBtn = document.getElementById('send');
+
+const sendMessage = () => {
+  event.preventDefault();
+  const messageInput = document.getElementById('message');
+
+  db.collection('messages')
+    .add({
+      value: messageInput.value,
+      createdAt: new Date(),
+    })
+    .then((docRef) => {
+      console.log('Document written with ID: ', docRef.id);
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+};
+
+sendBtn.addEventListener('click', sendMessage);
+sendBtn.addEventListener('submit', sendMessage);
+
+const appendMessage = (value, createdAt) => {
+  const messageP = document.createElement('p');
+  messageP.innerText = `${value}: ${new Date(createdAt).toLocaleString()}`;
+  return messageP;
+};
+
+const displayMessages = () => {
+  db.collection('messages').onSnapshot((doc) => {
+    console.log('Current data: ', doc.docs);
+    doc.docs.forEach((message) => {
+      db.collection('messages')
+        .doc(message.id)
+        .onSnapshot((message) => {
+          console.log(message.data());
+          const { value, createdAt } = message.data();
+          const messagesContainer = document.querySelector('div.messages');
+          messagesContainer.appendChild(
+            appendMessage(value, createdAt.toDate())
+          );
+        });
+    });
+  });
+};
+
+displayMessages();
