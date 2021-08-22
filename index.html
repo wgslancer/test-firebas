@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="email" />
+      <input type="text" id="password" />
+      <button type="submit" id="register">Dang ky</button>
+    </form>
+    <button type="button" id="google-login">login with google</button>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: 'AIzaSyA4hnaFteN5rJ8o6GuC1fe75GwTqcD23_w',
+        authDomain: 'test-jsi.firebaseapp.com',
+        projectId: 'test-jsi',
+        storageBucket: 'test-jsi.appspot.com',
+        messagingSenderId: '399575010032',
+        appId: '1:399575010032:web:4308fe0afef180bffd5035',
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="./index.js"></script>
+  </body>
+</html>
