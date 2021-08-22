@@ -57,3 +57,17 @@ function loginWithGoogle() {
 const googleBtn = document.getElementById('google-login');
 
 googleBtn.addEventListener('click', loginWithGoogle);
+
+const logoutBtn = document.getElementById('logout');
+
+const logout = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log('da dang xuat');
+    })
+    .catch((err) => console.log(err));
+};
+
+logoutBtn.addEventListener('click', logout);
